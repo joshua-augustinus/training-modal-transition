@@ -40,12 +40,12 @@ const MasterScreen = (props: Props) => {
             <View style={{ height: 50, backgroundColor: 'red', flexDirection: 'row', alignItems: 'center' }}>
 
                 <TouchableOpacity style={{ backgroundColor: 'yellow' }}
-                    onPress={() => onMenuPress()}>
+                    onPress={() => onButtonPress()}>
                     <Text>Menu</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <FeatureButton />
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+                <FeatureButton navigation={props.navigation} />
             </View>
         </SafeAreaView>
 

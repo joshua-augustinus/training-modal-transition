@@ -7,7 +7,7 @@ import { DrawerItems } from 'react-navigation-drawer';
 
 const SideMenu = (props) => {
     const onItemPress = ({ route, focused }) => {
-        console.log("route", route);
+        /*console.log("route", route);
         if (route.key === "Home") {
             const resetAction = StackActions.reset({
                 index: 0,
@@ -17,7 +17,7 @@ const SideMenu = (props) => {
         } else {
             props.navigation.navigate(route);
 
-        }
+        }*/
     }
 
     return (
@@ -27,7 +27,7 @@ const SideMenu = (props) => {
                 style={styles.container}
                 forceInset={{ top: 'always', horizontal: 'never' }}
             >
-                <DrawerItems {...props} onItemPress={onItemPress} />
+                <DrawerItems {...props} />
             </SafeAreaView>
         </ScrollView>
     )

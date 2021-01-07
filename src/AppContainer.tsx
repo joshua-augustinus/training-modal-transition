@@ -15,10 +15,10 @@ const InnerStack = createStackNavigator({
 
 const RootStack = createDrawerNavigator({
     Home: {
-        screen: InnerStack
+        screen: MasterScreen
     },
     SecondScreen: {
-        screen: InnerStack
+        screen: ActivityScreen
     },
     Activity: {
         screen: ActivityScreen

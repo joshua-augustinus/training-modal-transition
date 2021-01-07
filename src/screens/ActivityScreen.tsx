@@ -1,44 +1,59 @@
-import React from 'react';
+import { FeatureButton } from '@src/components/FeatureButton';
+import React, { useEffect } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, StackActions } from 'react-navigation';
 import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
 
-
+/**
+ * https://reactnavigation.org/docs/4.x/typescript
+ */
 type Props = {
     navigation: NavigationDrawerProp<{ userId: string, routeName: string }>;
 }
 
+const ActivityScreen = (props: Props) => {
 
-class ActivityScreen extends React.Component<Props> {
-    static navigationOptions = {
-        drawerLabel: () => null
-    }
+    useEffect(() => {
 
-    onMenuPress() {
-        console.log(this.props.navigation.state);// { key: 'Home', routeName: 'Home' }
+    }, []);
+
+    const onMenuPress = () => {
+        console.log(props.navigation.state);// { key: 'Home', routeName: 'Home' }
         console.log("Menu pressed");
-        this.props.navigation.dispatch(DrawerActions.toggleDrawer());
+        props.navigation.dispatch(DrawerActions.toggleDrawer());
     }
 
-    render() {
-        return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <View style={{ height: 50, backgroundColor: 'red', flexDirection: 'row', alignItems: 'center' }}>
+    const onButtonPress = () => {
+        const pushAction = StackActions.push({
+            routeName: 'Stack1',
+            params: {
+                myUserId: 9,
+            },
+        });
 
-                    <TouchableOpacity style={{ backgroundColor: 'yellow' }}
-                        onPress={() => this.onMenuPress()}>
-                        <Text>Menu</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
-                    <Text>{this.props.navigation.state.routeName}</Text>
-                    <TextInput placeholder="Enter text here..."></TextInput>
-                </View>
-            </SafeAreaView>
-
-        );
+        props.navigation.dispatch(pushAction);
     }
+
+
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ height: 50, backgroundColor: 'red', flexDirection: 'row', alignItems: 'center' }}>
+
+                <TouchableOpacity style={{ backgroundColor: 'yellow' }}
+                    onPress={() => onButtonPress()}>
+                    <Text>Menu</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+                <FeatureButton navigation={props.navigation} />
+                <Text>Placeholder</Text>
+            </View>
+        </SafeAreaView>
+
+    );
+
 }
+
+ActivityScreen.navigationOptions = {}
 
 export { ActivityScreen }
