@@ -4,3 +4,7 @@ export interface NavigationOptions {
     headerRight: () => React.ReactNode,
     headerTitle: string
 }
+
+export interface RootState {
+    isLoadingOverlayVisible: boolean
+}
