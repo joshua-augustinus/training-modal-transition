@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import { RootState } from '@src/types';
+import { PressInfo, RootState } from '@src/types';
 
 /**
  * This is the modern way of creating reducers using redux-toolkit
@@ -11,14 +11,13 @@ import { RootState } from '@src/types';
  * {type:'overlay/update', payload:false}
  */
 
-export const updateLoadingVisibility = createAction<boolean>('overlay/update')
-
+export const updatePressInfo = createAction<PressInfo>('pressInfo/update');
 
 /**
  * Initial State
  */
 const initialState: RootState = {
-    isLoadingOverlayVisible: true
+    pressInfo: null
 };
 
 /**
@@ -27,8 +26,8 @@ const initialState: RootState = {
  * https://redux-toolkit.js.org/api/createReducer
  */
 const rootReducer = createReducer(initialState, (builder) => {
-    builder.addCase(updateLoadingVisibility, (state, action) => {
-        state.isLoadingOverlayVisible = action.payload;
+    builder.addCase(updatePressInfo, (state, action) => {
+        state.pressInfo = action.payload;
     })
 });
 
