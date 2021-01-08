@@ -43,7 +43,7 @@ const OverlayScreen = (props: Props) => {
             });
             Animated.timing(layoutState, {
                 toValue: new Animated.Value(1),
-                easing: EasingFunctions.easeInOutQuad,
+                easing: EasingFunctions.easeOutQuad,
                 duration: 800
             }).start(() => {
                 console.log("Finished timing")
