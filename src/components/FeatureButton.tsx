@@ -23,13 +23,13 @@ const FeatureButton = (props: Props) => {
         });
     }
 
-    const imageTransform = [{ scale: 0.9 }]
+    const imageTransform = [{ scale: 1 }]
 
     return (
 
 
-        <Pressable onPress={onButtonPress}>
-            <View ref={cardRef} >
+        <Pressable onPress={onButtonPress} style={{ margin: 5 }}>
+            <View ref={cardRef} collapsable={false} >
                 <Image style={{ ...styles.image, width: width / 2, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
 
             </View>

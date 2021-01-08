@@ -45,7 +45,11 @@ const MasterScreen = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                <FeatureButton navigation={props.navigation} />
+                <View style={{ flexDirection: 'row', padding: 5 }}>
+                    <FeatureButton navigation={props.navigation} />
+                    <FeatureButton navigation={props.navigation} />
+
+                </View>
             </View>
         </SafeAreaView>
 

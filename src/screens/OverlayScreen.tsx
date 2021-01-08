@@ -63,18 +63,25 @@ const OverlayScreen = (props: Props) => {
 
     }
 
-    const imageTransform = [{
+    console.log("PressInof", pressInfo);
+
+    const containerTransform = [{
         translateY: springState.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 400]
-        })
+            outputRange: [pressInfo.y - 50, 400]
+        }),
+
     },
-    {
-        scale: springState.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.90, 1]
-        })
-    }]
+    ]
+
+    const imageTransform = [
+        {
+            translateX: layoutState.interpolate({
+                inputRange: [0, 1],
+                outputRange: [pressInfo.x, 0]
+            })
+
+        }]
 
     const height = layoutState.interpolate({
         inputRange: [0, 1],
@@ -96,9 +103,9 @@ const OverlayScreen = (props: Props) => {
         <SafeAreaView style={{ ...styles.overlayContainer, transform: overlayTransform }}>
             <View style={{ height: 50, opacity: 0 }}>
             </View>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
-                <Spring.View style={{ transform: imageTransform }}>
-                    <Animated.Image style={{ ...styles.image, width: width, height: height }} resizeMode='cover' source={require('../assets/sample.jpg')} />
+            <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
+                <Spring.View style={{ transform: containerTransform }}>
+                    <Animated.Image style={{ ...styles.image, width: width, height: height, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
 
 
 
