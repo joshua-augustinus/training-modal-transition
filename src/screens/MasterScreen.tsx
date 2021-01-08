@@ -3,6 +3,7 @@ import { Button, Text, TextInput, TouchableOpacity, View, BackHandler, StyleShee
 import { SafeAreaView, StackActions } from 'react-navigation';
 import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
 import { FeatureButton } from '@src/components/FeatureButton';
+import { layoutDimensions } from '@src/reducers/layoutDimensions';
 
 /**
  * https://reactnavigation.org/docs/4.x/typescript
@@ -34,6 +35,10 @@ const MasterScreen = (props: Props) => {
         props.navigation.dispatch(pushAction);
     }
 
+    const onLayout = (e) => {
+        const layout = { x: e.nativeEvent.layout.x, y: e.nativeEvent.layout.y };
+        layoutDimensions.contentOffset = layout.y;
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -44,27 +49,24 @@ const MasterScreen = (props: Props) => {
                     <Text>Menu</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+            <View onLayout={onLayout} style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
                 <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
-                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
 
                 </View>
                 <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
-                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
 
                 </View>
                 <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
-                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
 
                 </View>
-                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
-                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
 
-                </View>
+                <FeatureButton navigation={props.navigation} halfSize={false} />
 
             </View>
         </SafeAreaView>

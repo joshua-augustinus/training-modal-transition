@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getSpringConfig } from '@src/constants/SpringConfig';
 import Animated from 'react-native-reanimated';
 import { EasingFunctions } from '@src/constants/EasingFunctions';
-import { updatePressInfo } from '@src/reducers';
+import { layoutDimensions } from '@src/reducers/layoutDimensions';
 /**
  * https://reactnavigation.org/docs/4.x/typescript
  */
@@ -24,6 +24,7 @@ const OverlayScreen = (props: Props) => {
     useEffect(() => {
         if (pressInfo) {
             setTransitionString('forward')
+
 
         } else {
             setTransitionString('default');
@@ -68,7 +69,7 @@ const OverlayScreen = (props: Props) => {
     const containerTransform = [{
         translateY: springState.interpolate({
             inputRange: [0, 1],
-            outputRange: [pressInfo.y - 50, 0]
+            outputRange: [pressInfo.y - layoutDimensions.contentOffset, 0]
         }),
 
     }
@@ -93,7 +94,7 @@ const OverlayScreen = (props: Props) => {
 
     const width = layoutState.interpolate({
         inputRange: [0, 1],
-        outputRange: [screenWidth / 2, screenWidth]
+        outputRange: [pressInfo.width, screenWidth]
     })
 
     //This is needed to get rid of flash
@@ -107,7 +108,7 @@ const OverlayScreen = (props: Props) => {
             </View>
             <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
                 <Spring.View style={{ transform: containerTransform }}>
-                    <Animated.Image style={{ ...styles.image, width: width, height: height, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
+                    <Animated.Image style={{ ...styles.image, width: width, height: height, transform: imageTransform }} resizeMode='cover' source={pressInfo.imageSource} />
 
 
 
@@ -126,11 +127,10 @@ const styles = StyleSheet.create({
     overlayContainer: {
         ...StyleSheet.absoluteFillObject,
         overflow: 'hidden',
-        zIndex: -1//ScrollView of activity will not work otherwis    },
+        zIndex: 1//ScrollView of activity will not work otherwis    },
 
     },
     image: {
-        width: '100%',
 
     }
 });

@@ -7,19 +7,20 @@ import { useDispatch } from 'react-redux';
 interface Props {
     navigation: any,
     style?: any
+    halfSize: boolean
 }
 
 export const FEATURE_BUTTON_HEIGHT = 150;
 
 const FeatureButton = (props: Props) => {
-    const width = useWindowDimensions().width;
+    const screenWidth = useWindowDimensions().width;
     const cardRef = useRef(null);
     const dispatch = useDispatch();
 
     const onButtonPress = () => {
         console.log("Pressed");
         cardRef.current.measure((x, y, width, height, pageX, pageY) => {
-            const layout = { x: pageX, y: pageY };
+            const layout = { x: pageX, y: pageY, width: width, height: height, imageSource: require('../assets/sample.jpg') };
             dispatch(updatePressInfo(layout));
             props.navigation.navigate('SecondScreen')
         });
@@ -28,13 +29,13 @@ const FeatureButton = (props: Props) => {
     const imageTransform = [{ scale: 1 }]
 
 
-
+    const width = props.halfSize ? screenWidth / 2 - 20 : screenWidth - 30
     return (
 
 
         <Pressable onPress={onButtonPress} >
             <View collapsable={false} style={{ ...props.style, justifyContent: 'center', alignItems: 'center', }}>
-                <Image ref={cardRef} style={{ ...styles.image, width: width / 2 - 20, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
+                <Image ref={cardRef} style={{ ...styles.image, width: width, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
 
             </View>
         </Pressable>

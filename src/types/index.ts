@@ -11,5 +11,8 @@ export interface RootState {
 
 export interface PressInfo {
     x: number,
-    y: number
+    y: number,
+    width: number,
+    height: number,
+    imageSource: any
 }
