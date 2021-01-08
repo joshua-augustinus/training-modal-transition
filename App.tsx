@@ -16,9 +16,10 @@ import {
     StatusBar,
 } from 'react-native';
 import { AppContainer } from '@src/AppContainer';
-import { OverlayScreen } from '@src/screens/OverlayScreen';
 import { RootState } from '@src/types';
 import { useSelector } from 'react-redux'
+import { SmallTransition } from '@src/screens/Overlays/SmallTransition';
+import { MediumTransition } from '@src/screens/Overlays/MediumTransition';
 
 const App = () => {
     const smallPressInfo = useSelector((state: RootState) => state.smallPressInfo);
@@ -27,8 +28,8 @@ const App = () => {
     return (
         <Fragment>
             <AppContainer />
-            <OverlayScreen pressInfo={smallPressInfo} />
-            <OverlayScreen pressInfo={mediumPressInfo} />
+            <SmallTransition pressInfo={smallPressInfo} />
+            <MediumTransition pressInfo={mediumPressInfo} />
 
         </Fragment>
     );

@@ -21,16 +21,20 @@ const FeatureButton = (props: Props) => {
     const onButtonPress = () => {
         console.log("Pressed");
         cardRef.current.measure((x, y, width, height, pageX, pageY) => {
-            const layout = { x: pageX, y: pageY, width: width, height: height, imageSource: require('../assets/sample.jpg'), borderRadius: BORDER_RADIUS };
+            const layout = {
+                x: pageX, y: pageY, width: width, height: height, imageSource: require('../assets/sample.jpg'), borderRadius: BORDER_RADIUS, callback: () => {
+                    props.navigation.navigate('SecondScreen')
+                }
+            };
             if (props.halfSize)
                 dispatch(updateSmallPressInfo(layout));
             else {
                 dispatch(updateMediumPressInfo(layout));
             }
-            setTimeout(() => {
-                props.navigation.navigate('SecondScreen')
+            /*setTimeout(() => {
+              
 
-            }, 200)
+            }, 500)*/
         });
     }
 

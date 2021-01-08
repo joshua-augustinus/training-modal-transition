@@ -15,7 +15,7 @@ type Props = {
 }
 export const FEATURE_BUTTON_HEIGHT = 150;
 
-const OverlayScreen = (props: Props) => {
+const MediumTransition = (props: Props) => {
     const pressInfo = props.pressInfo;
     const screenWidth = useWindowDimensions().width;
     const springState = useRef(new Spring.Value(0)).current;
@@ -40,6 +40,7 @@ const OverlayScreen = (props: Props) => {
     useEffect(() => {
         if (transitionString === 'forward') {
             Spring.spring(springState, getSpringConfig(1)).start(() => {
+                pressInfo.callback();
                 setTransitionString('default')
                 console.log("Finished spring")
             });
@@ -135,7 +136,7 @@ const OverlayScreen = (props: Props) => {
 }
 
 
-export { OverlayScreen }
+export { MediumTransition }
 
 const styles = StyleSheet.create({
     overlayContainer: {
@@ -153,4 +154,3 @@ const styles = StyleSheet.create({
 
     }
 });
-
