@@ -7,7 +7,8 @@ export interface NavigationOptions {
 
 export interface RootState {
     smallPressInfo?: PressInfo
-    mediumPressInfo?: PressInfo
+    mediumPressInfo?: PressInfo,
+    articleHeader?: any
 }
 
 export interface PressInfo {

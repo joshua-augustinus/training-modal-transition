@@ -41,7 +41,7 @@ const SmallTransition = (props: Props) => {
             Animated.timing(layoutState, {
                 toValue: new Animated.Value(1),
                 easing: EasingFunctions.easeInOutQuad,
-                duration: 500
+                duration: 400
             }).start(() => {
                 pressInfo.callback();
                 setTransitionString('default')
@@ -72,11 +72,7 @@ const SmallTransition = (props: Props) => {
             inputRange: [0, 1],
             outputRange: [pressInfo.y - layoutDimensions.contentOffset, 0]
         })
-    },
-
-    ]
-
-    const imageTransform = [{
+    }, {
         translateX: layoutState.interpolate({
             inputRange: [0, 1],
             outputRange: [pressInfo.x, 0]
@@ -86,9 +82,11 @@ const SmallTransition = (props: Props) => {
     ]
 
 
+
+
     const height = layoutState.interpolate({
         inputRange: [0, 1],
-        outputRange: [FEATURE_BUTTON_HEIGHT, FEATURE_BUTTON_HEIGHT + 100]
+        outputRange: [pressInfo.height, FEATURE_BUTTON_HEIGHT + 100]
     })
 
 
@@ -102,6 +100,14 @@ const SmallTransition = (props: Props) => {
         outputRange: [pressInfo.borderRadius, 0]
     })
 
+    const textTransform = [{
+        scale:
+            layoutState.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1]
+            })
+    }]
+
     //This is needed to get rid of flash
     const opacity = transitionString === 'forward' ? 1 : 0
     const overlayTransform = [{ translateX: transitionString === 'forward' ? 0 : screenWidth }]
@@ -113,9 +119,8 @@ const SmallTransition = (props: Props) => {
             </View>
             <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
                 <Animated.View style={{ transform: containerTransform }}>
-                    <Animated.View style={{ transform: imageTransform }}>
-                        <Animated.Image style={{ ...styles.image, width: width, height: height, borderRadius: borderRadius }} resizeMode='cover' source={pressInfo.imageSource} />
-
+                    <Animated.Image style={{ ...styles.image, width: width, height: height, borderRadius: borderRadius }} resizeMode='cover' source={pressInfo.imageSource} />
+                    <Animated.View style={{ ...styles.textContainer, transform: textTransform }} ><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                     </Animated.View>
 
 

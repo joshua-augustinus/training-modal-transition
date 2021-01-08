@@ -20,7 +20,8 @@ export const updateMediumPressInfo = createAction<PressInfo>('mediumPressInfo/up
  */
 const initialState: RootState = {
     smallPressInfo: null,
-    mediumPressInfo: null
+    mediumPressInfo: null,
+    articleHeader: null
 };
 
 /**
@@ -31,10 +32,13 @@ const initialState: RootState = {
 const rootReducer = createReducer(initialState, (builder) => {
     builder.addCase(updateSmallPressInfo, (state, action) => {
         state.smallPressInfo = action.payload;
+        state.articleHeader = state.smallPressInfo.imageSource;
     })
 
     builder.addCase(updateMediumPressInfo, (state, action) => {
         state.mediumPressInfo = action.payload;
+        state.articleHeader = state.mediumPressInfo.imageSource;
+
     })
 });
 

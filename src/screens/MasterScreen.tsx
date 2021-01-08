@@ -12,6 +12,9 @@ type Props = {
     navigation: NavigationDrawerProp<{ userId: string, routeName: string }>;
 }
 
+const image1 = require('../assets/sample.jpg');
+const image2 = require('../assets/1124.jpg')
+
 const MasterScreen = (props: Props) => {
 
     useEffect(() => {
@@ -51,22 +54,22 @@ const MasterScreen = (props: Props) => {
             </View>
             <View onLayout={onLayout} style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
                 <View style={{ flexDirection: 'row', }}>
-                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
-                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} image={image1} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} image={image1} />
 
                 </View>
                 <View style={{ flexDirection: 'row', }}>
-                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
-                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} image={image2} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} image={image1} />
 
                 </View>
                 <View style={{ flexDirection: 'row', }}>
-                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
-                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} image={image1} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} image={image1} />
 
                 </View>
 
-                <FeatureButton navigation={props.navigation} halfSize={false} />
+                <FeatureButton navigation={props.navigation} halfSize={false} image={image1} />
 
             </View>
         </SafeAreaView>

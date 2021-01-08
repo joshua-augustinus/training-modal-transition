@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 interface Props {
     navigation: any,
     style?: any
-    halfSize: boolean
+    halfSize: boolean,
+    image: any
 }
 
 export const FEATURE_BUTTON_HEIGHT = 150;
@@ -22,7 +23,7 @@ const FeatureButton = (props: Props) => {
         console.log("Pressed");
         cardRef.current.measure((x, y, width, height, pageX, pageY) => {
             const layout = {
-                x: pageX, y: pageY, width: width, height: height, imageSource: require('../assets/sample.jpg'), borderRadius: BORDER_RADIUS, callback: () => {
+                x: pageX, y: pageY, width: width, height: height, imageSource: props.image, borderRadius: BORDER_RADIUS, callback: () => {
                     props.navigation.navigate('SecondScreen')
                 }
             };
@@ -47,7 +48,7 @@ const FeatureButton = (props: Props) => {
 
         <Pressable onPress={onButtonPress} >
             <View collapsable={false} style={{ ...styles.container, ...props.style, }}>
-                <Image ref={cardRef} style={{ ...styles.image, width: width, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
+                <Image ref={cardRef} style={{ ...styles.image, width: width, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={props.image} />
                 <View style={styles.textContainer}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                 </View>
             </View>

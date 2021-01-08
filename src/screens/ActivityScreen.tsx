@@ -1,9 +1,10 @@
 import { FeatureButton } from '@src/components/FeatureButton';
+import { RootState } from '@src/types';
 import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView, StackActions } from 'react-navigation';
 import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
-
+import { useSelector } from 'react-redux'
 /**
  * https://reactnavigation.org/docs/4.x/typescript
  */
@@ -13,7 +14,7 @@ type Props = {
 export const FEATURE_BUTTON_HEIGHT = 150;
 
 const ActivityScreen = (props: Props) => {
-
+    const articleHeader = useSelector((state: RootState) => state.articleHeader)
     useEffect(() => {
 
     }, []);
@@ -46,7 +47,12 @@ const ActivityScreen = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start' }}>
-                <Image style={{ ...styles.image, width: '100%', height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={require('../assets/sample.jpg')} />
+                <View style={{ width: '100%', height: FEATURE_BUTTON_HEIGHT + 100 }}>
+                    <Image style={{ ...styles.image, width: '100%', height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={articleHeader} />
+                    <View style={styles.textContainer} ><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
+                    </View>
+
+                </View>
 
                 <Text>Placeholder</Text>
             </View>
@@ -72,5 +78,10 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
 
-    }
+    },
+    textContainer: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        marginHorizontal: 20
+    },
 })
