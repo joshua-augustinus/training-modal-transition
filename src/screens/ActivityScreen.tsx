@@ -1,6 +1,6 @@
 import { FeatureButton } from '@src/components/FeatureButton';
 import React, { useEffect } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView, StackActions } from 'react-navigation';
 import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
 
@@ -10,6 +10,7 @@ import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
 type Props = {
     navigation: NavigationDrawerProp<{ userId: string, routeName: string }>;
 }
+export const FEATURE_BUTTON_HEIGHT = 150;
 
 const ActivityScreen = (props: Props) => {
 
@@ -44,8 +45,9 @@ const ActivityScreen = (props: Props) => {
                     <Text>Menu</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                <FeatureButton navigation={props.navigation} />
+            <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start' }}>
+                <Image style={{ ...styles.image, width: '100%', height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={require('../assets/sample.jpg')} />
+
                 <Text>Placeholder</Text>
             </View>
         </SafeAreaView>
@@ -57,3 +59,18 @@ const ActivityScreen = (props: Props) => {
 ActivityScreen.navigationOptions = {}
 
 export { ActivityScreen }
+
+const styles = StyleSheet.create({
+    container: {
+        ...StyleSheet.absoluteFillObject,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        zIndex: 1
+    },
+    image: {
+        width: '100%',
+
+    }
+})

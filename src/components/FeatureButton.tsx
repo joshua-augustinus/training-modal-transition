@@ -21,6 +21,7 @@ const FeatureButton = (props: Props) => {
         cardRef.current.measure((x, y, width, height, pageX, pageY) => {
             const layout = { x: pageX, y: pageY };
             dispatch(updatePressInfo(layout));
+            props.navigation.navigate('SecondScreen')
         });
     }
 
