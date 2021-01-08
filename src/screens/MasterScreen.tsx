@@ -50,17 +50,17 @@ const MasterScreen = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View onLayout={onLayout} style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
-                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+                <View style={{ flexDirection: 'row', }}>
                     <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
                     <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
 
                 </View>
-                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+                <View style={{ flexDirection: 'row', }}>
                     <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
                     <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
 
                 </View>
-                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+                <View style={{ flexDirection: 'row', }}>
                     <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} />
                     <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} />
 

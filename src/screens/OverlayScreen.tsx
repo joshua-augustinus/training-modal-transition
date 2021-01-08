@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated as Spring, View, BackHandler, useWindowDimensions, StyleSheet, Image } from 'react-native';
+import { Animated as Spring, View, BackHandler, useWindowDimensions, StyleSheet, Image, Text } from 'react-native';
 import { SafeAreaView, StackActions } from 'react-navigation';
 import { PressInfo, RootState } from '@src/types';
 import { useSelector, useDispatch } from 'react-redux'
@@ -44,7 +44,7 @@ const OverlayScreen = (props: Props) => {
             Animated.timing(layoutState, {
                 toValue: new Animated.Value(1),
                 easing: EasingFunctions.easeInOutQuad,
-                duration: 600
+                duration: 800
             }).start(() => {
                 console.log("Finished timing")
 
@@ -74,21 +74,20 @@ const OverlayScreen = (props: Props) => {
         translateY: springState.interpolate({
             inputRange: [0, 1],
             outputRange: [pressInfo.y - layoutDimensions.contentOffset, 0]
-        }),
+        })
+    },
 
+    ]
+
+    const imageTransform = [{
+        translateX: layoutState.interpolate({
+            inputRange: [0, 1],
+            outputRange: [pressInfo.x, 0]
+        })
     }
 
     ]
 
-
-    const imageTransform = [
-        {
-            translateX: layoutState.interpolate({
-                inputRange: [0, 1],
-                outputRange: [pressInfo.x, 0]
-            })
-
-        }]
 
     const height = layoutState.interpolate({
         inputRange: [0, 1],
@@ -101,6 +100,11 @@ const OverlayScreen = (props: Props) => {
         outputRange: [pressInfo.width, screenWidth]
     })
 
+    const borderRadius = layoutState.interpolate({
+        inputRange: [0, 1],
+        outputRange: [pressInfo.borderRadius, 0]
+    })
+
     //This is needed to get rid of flash
     const opacity = transitionString === 'forward' ? 1 : 0
     const overlayTransform = [{ translateX: transitionString === 'forward' ? 0 : screenWidth }]
@@ -110,9 +114,13 @@ const OverlayScreen = (props: Props) => {
         <SafeAreaView style={{ ...styles.overlayContainer, transform: overlayTransform }}>
             <View style={{ height: 50, opacity: 0 }}>
             </View>
-            <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
+            <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity, overflow: 'hidden' }}>
                 <Spring.View style={{ transform: containerTransform }}>
-                    <Animated.Image style={{ ...styles.image, width: width, height: height, transform: imageTransform }} resizeMode='cover' source={pressInfo.imageSource} />
+                    <Animated.View style={{ transform: imageTransform }}>
+                        <Animated.Image style={{ ...styles.image, width: width, height: height, borderRadius: borderRadius }} resizeMode='cover' source={pressInfo.imageSource} />
+                        <View style={{ ...styles.textContainer, width: '100%' }}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
+                        </View>
+                    </Animated.View>
 
 
 
@@ -133,6 +141,11 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         zIndex: 1//ScrollView of activity will not work otherwis    },
 
+    },
+    textContainer: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        marginHorizontal: 20
     },
     image: {
 

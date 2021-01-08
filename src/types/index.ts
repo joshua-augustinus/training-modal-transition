@@ -6,7 +6,8 @@ export interface NavigationOptions {
 }
 
 export interface RootState {
-    pressInfo?: PressInfo
+    smallPressInfo?: PressInfo
+    mediumPressInfo?: PressInfo
 }
 
 export interface PressInfo {
@@ -14,5 +15,6 @@ export interface PressInfo {
     y: number,
     width: number,
     height: number,
-    imageSource: any
+    imageSource: any,
+    borderRadius: number
 }
