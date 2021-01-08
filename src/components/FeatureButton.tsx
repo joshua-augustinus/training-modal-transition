@@ -27,7 +27,10 @@ const FeatureButton = (props: Props) => {
             else {
                 dispatch(updateMediumPressInfo(layout));
             }
-            props.navigation.navigate('SecondScreen')
+            setTimeout(() => {
+                props.navigation.navigate('SecondScreen')
+
+            }, 200)
         });
     }
 

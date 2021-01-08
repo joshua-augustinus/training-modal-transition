@@ -24,8 +24,10 @@ const OverlayScreen = (props: Props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (pressInfo) {
+            setTimeout(() => {
+                setTransitionString('forward')
+            }, 100)
 
-            setTransitionString('forward')
 
 
 
@@ -44,7 +46,7 @@ const OverlayScreen = (props: Props) => {
             Animated.timing(layoutState, {
                 toValue: new Animated.Value(1),
                 easing: EasingFunctions.easeOutQuad,
-                duration: 800
+                duration: 600
             }).start(() => {
                 console.log("Finished timing")
 
@@ -56,7 +58,7 @@ const OverlayScreen = (props: Props) => {
             Animated.timing(layoutState, {
                 toValue: 0,
                 easing: EasingFunctions.easeInOut,
-                duration: 100
+                duration: 1
             }).start();
         }
     }, [transitionString]);
@@ -114,11 +116,11 @@ const OverlayScreen = (props: Props) => {
         <SafeAreaView style={{ ...styles.overlayContainer, transform: overlayTransform }}>
             <View style={{ height: 50, opacity: 0 }}>
             </View>
-            <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity, overflow: 'hidden' }}>
+            <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
                 <Spring.View style={{ transform: containerTransform }}>
                     <Animated.View style={{ transform: imageTransform }}>
                         <Animated.Image style={{ ...styles.image, width: width, height: height, borderRadius: borderRadius }} resizeMode='cover' source={pressInfo.imageSource} />
-                        <View style={{ ...styles.textContainer, width: '100%' }}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
+                        <View style={{ ...styles.textContainer, width: screenWidth - 40 }}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                         </View>
                     </Animated.View>
 
