@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated as Spring, View, BackHandler, useWindowDimensions, StyleSheet, Image } from 'react-native';
 import { SafeAreaView, StackActions } from 'react-navigation';
-import { RootState } from '@src/types';
+import { PressInfo, RootState } from '@src/types';
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpringConfig } from '@src/constants/SpringConfig';
 import Animated from 'react-native-reanimated';
@@ -11,11 +11,12 @@ import { layoutDimensions } from '@src/reducers/layoutDimensions';
  * https://reactnavigation.org/docs/4.x/typescript
  */
 type Props = {
+    pressInfo: PressInfo
 }
 export const FEATURE_BUTTON_HEIGHT = 150;
 
 const OverlayScreen = (props: Props) => {
-    const pressInfo = useSelector((state: RootState) => state.pressInfo);
+    const pressInfo = props.pressInfo;
     const screenWidth = useWindowDimensions().width;
     const springState = useRef(new Spring.Value(0)).current;
     const layoutState = useRef(new Animated.Value(0)).current;
@@ -23,7 +24,10 @@ const OverlayScreen = (props: Props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (pressInfo) {
+
             setTransitionString('forward')
+
+
 
 
         } else {
@@ -38,7 +42,7 @@ const OverlayScreen = (props: Props) => {
                 console.log("Finished spring")
             });
             Animated.timing(layoutState, {
-                toValue: 1,
+                toValue: new Animated.Value(1),
                 easing: EasingFunctions.easeInOutQuad,
                 duration: 600
             }).start(() => {

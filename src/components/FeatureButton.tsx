@@ -1,4 +1,4 @@
-import { updatePressInfo } from "@src/reducers";
+import { updateMediumPressInfo, updateSmallPressInfo } from "@src/reducers";
 import React, { useRef, useState } from "react";
 import { Image, Pressable, StyleSheet, TouchableOpacity, useWindowDimensions, View } from "react-native";
 import Animated from "react-native-reanimated";
@@ -21,7 +21,11 @@ const FeatureButton = (props: Props) => {
         console.log("Pressed");
         cardRef.current.measure((x, y, width, height, pageX, pageY) => {
             const layout = { x: pageX, y: pageY, width: width, height: height, imageSource: require('../assets/sample.jpg') };
-            dispatch(updatePressInfo(layout));
+            if (props.halfSize)
+                dispatch(updateSmallPressInfo(layout));
+            else {
+                dispatch(updateMediumPressInfo(layout));
+            }
             props.navigation.navigate('SecondScreen')
         });
     }

@@ -17,12 +17,19 @@ import {
 } from 'react-native';
 import { AppContainer } from '@src/AppContainer';
 import { OverlayScreen } from '@src/screens/OverlayScreen';
+import { RootState } from '@src/types';
+import { useSelector } from 'react-redux'
 
 const App = () => {
+    const smallPressInfo = useSelector((state: RootState) => state.smallPressInfo);
+    const mediumPressInfo = useSelector((state: RootState) => state.mediumPressInfo);
+
     return (
         <Fragment>
             <AppContainer />
-            <OverlayScreen />
+            <OverlayScreen pressInfo={smallPressInfo} />
+            <OverlayScreen pressInfo={mediumPressInfo} />
+
         </Fragment>
     );
 };

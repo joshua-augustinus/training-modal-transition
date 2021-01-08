@@ -11,13 +11,16 @@ import { PressInfo, RootState } from '@src/types';
  * {type:'overlay/update', payload:false}
  */
 
-export const updatePressInfo = createAction<PressInfo>('pressInfo/update');
+export const updateSmallPressInfo = createAction<PressInfo>('smallPressInfo/update');
+export const updateMediumPressInfo = createAction<PressInfo>('mediumPressInfo/update');
+
 
 /**
  * Initial State
  */
 const initialState: RootState = {
-    pressInfo: null
+    smallPressInfo: null,
+    mediumPressInfo: null
 };
 
 /**
@@ -26,8 +29,12 @@ const initialState: RootState = {
  * https://redux-toolkit.js.org/api/createReducer
  */
 const rootReducer = createReducer(initialState, (builder) => {
-    builder.addCase(updatePressInfo, (state, action) => {
-        state.pressInfo = action.payload;
+    builder.addCase(updateSmallPressInfo, (state, action) => {
+        state.smallPressInfo = action.payload;
+    })
+
+    builder.addCase(updateMediumPressInfo, (state, action) => {
+        state.mediumPressInfo = action.payload;
     })
 });
 
