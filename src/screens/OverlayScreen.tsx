@@ -38,8 +38,8 @@ const OverlayScreen = (props: Props) => {
             });
             Animated.timing(layoutState, {
                 toValue: 1,
-                easing: EasingFunctions.easeInOut,
-                duration: 400
+                easing: EasingFunctions.easeInOutQuad,
+                duration: 600
             }).start(() => {
                 console.log("Finished timing")
 
@@ -68,11 +68,13 @@ const OverlayScreen = (props: Props) => {
     const containerTransform = [{
         translateY: springState.interpolate({
             inputRange: [0, 1],
-            outputRange: [pressInfo.y - 50, 400]
+            outputRange: [pressInfo.y - 50, 0]
         }),
 
-    },
+    }
+
     ]
+
 
     const imageTransform = [
         {

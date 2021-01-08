@@ -5,7 +5,8 @@ import Animated from "react-native-reanimated";
 import { useDispatch } from 'react-redux';
 
 interface Props {
-    navigation: any
+    navigation: any,
+    style?: any
 }
 
 export const FEATURE_BUTTON_HEIGHT = 150;
@@ -25,12 +26,14 @@ const FeatureButton = (props: Props) => {
 
     const imageTransform = [{ scale: 1 }]
 
+
+
     return (
 
 
-        <Pressable onPress={onButtonPress} style={{ margin: 5 }}>
-            <View ref={cardRef} collapsable={false} >
-                <Image style={{ ...styles.image, width: width / 2, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
+        <Pressable onPress={onButtonPress} >
+            <View collapsable={false} style={{ ...props.style, justifyContent: 'center', alignItems: 'center', }}>
+                <Image ref={cardRef} style={{ ...styles.image, width: width / 2 - 20, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={require('../assets/sample.jpg')} />
 
             </View>
         </Pressable>

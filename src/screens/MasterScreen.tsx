@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Text, TextInput, TouchableOpacity, View, BackHandler } from 'react-native';
+import { Button, Text, TextInput, TouchableOpacity, View, BackHandler, StyleSheet } from 'react-native';
 import { SafeAreaView, StackActions } from 'react-navigation';
 import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
 import { FeatureButton } from '@src/components/FeatureButton';
@@ -45,11 +45,27 @@ const MasterScreen = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                <View style={{ flexDirection: 'row', padding: 5 }}>
-                    <FeatureButton navigation={props.navigation} />
-                    <FeatureButton navigation={props.navigation} />
+                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
 
                 </View>
+                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
+
+                </View>
+                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
+
+                </View>
+                <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+                    <FeatureButton navigation={props.navigation} style={styles.leftButton} />
+                    <FeatureButton navigation={props.navigation} style={styles.rightButton} />
+
+                </View>
+
             </View>
         </SafeAreaView>
 
@@ -60,3 +76,12 @@ const MasterScreen = (props: Props) => {
 MasterScreen.navigationOptions = {}
 
 export { MasterScreen }
+
+const styles = StyleSheet.create({
+    leftButton: {
+        marginRight: 5
+    },
+    rightButton: {
+        marginLeft: 5
+    }
+})
