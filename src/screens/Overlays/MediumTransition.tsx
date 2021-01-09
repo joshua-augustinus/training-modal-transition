@@ -119,8 +119,8 @@ const MediumTransition = (props: Props) => {
             </View>
             <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
                 <Spring.View style={{ transform: containerTransform }}>
-                    <Animated.View style={{ transform: imageTransform }}>
-                        <Animated.Image style={{ ...styles.image, width: width, height: height, borderRadius: borderRadius }} resizeMode='cover' source={pressInfo.imageSource} />
+                    <Animated.View style={{ transform: imageTransform, width: width, height: height, borderRadius: borderRadius, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+                        <Animated.Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={pressInfo.imageSource} />
                         <View style={{ ...styles.textContainer, width: screenWidth - 40 }}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                         </View>
                     </Animated.View>

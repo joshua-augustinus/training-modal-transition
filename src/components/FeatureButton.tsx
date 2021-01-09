@@ -48,7 +48,10 @@ const FeatureButton = (props: Props) => {
 
         <Pressable onPress={onButtonPress} >
             <View collapsable={false} style={{ ...styles.container, ...props.style, }}>
-                <Image ref={cardRef} style={{ ...styles.image, width: width, height: FEATURE_BUTTON_HEIGHT, transform: imageTransform }} resizeMode='cover' source={props.image} />
+                <View ref={cardRef} style={{ overflow: 'hidden', width: width, height: FEATURE_BUTTON_HEIGHT, borderRadius: BORDER_RADIUS, justifyContent: 'center', alignItems: 'center' }}>
+                    <Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={props.image} />
+
+                </View>
                 <View style={styles.textContainer}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                 </View>
             </View>
@@ -69,6 +72,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20
     },
     image: {
-        borderRadius: BORDER_RADIUS
+        borderRadius: BORDER_RADIUS,
     }
 })

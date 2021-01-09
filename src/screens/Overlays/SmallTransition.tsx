@@ -19,6 +19,8 @@ const SmallTransition = (props: Props) => {
     const pressInfo = props.pressInfo;
     const screenWidth = useWindowDimensions().width;
     const layoutState = useRef(new Animated.Value(0)).current;
+    const heightState = useRef(new Animated.Value(0)).current;
+
     const [transitionString, setTransitionString] = useState<string>('default');
     useEffect(() => {
         if (pressInfo) {
@@ -43,10 +45,19 @@ const SmallTransition = (props: Props) => {
                 easing: EasingFunctions.easeInOutQuad,
                 duration: 400
             }).start(() => {
+
+
+            });
+            Animated.timing(heightState, {
+                toValue: new Animated.Value(1),
+                easing: EasingFunctions.easeInOutQuad,
+                duration: 600
+            }).start(() => {
                 pressInfo.callback();
                 setTransitionString('default')
 
             });
+
         } else if (transitionString === 'default') {
             console.log("Back to default");
 
@@ -55,6 +66,17 @@ const SmallTransition = (props: Props) => {
                 easing: EasingFunctions.easeInOut,
                 duration: 1
             }).start();
+
+            Animated.timing(heightState, {
+                toValue: 0,
+                easing: EasingFunctions.easeInOut,
+                duration: 1
+            }).start(() => {
+                pressInfo.callback();
+                setTransitionString('default')
+
+            });
+
         }
     }, [transitionString]);
 
@@ -65,7 +87,6 @@ const SmallTransition = (props: Props) => {
 
     }
 
-    console.log("PressInof", pressInfo);
 
     const containerTransform = [{
         translateY: layoutState.interpolate({
@@ -84,7 +105,7 @@ const SmallTransition = (props: Props) => {
 
 
 
-    const height = layoutState.interpolate({
+    const height = heightState.interpolate({
         inputRange: [0, 1],
         outputRange: [pressInfo.height, FEATURE_BUTTON_HEIGHT + 100]
     })
@@ -118,8 +139,8 @@ const SmallTransition = (props: Props) => {
             <View style={{ height: 50, opacity: 0 }}>
             </View>
             <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
-                <Animated.View style={{ transform: containerTransform }}>
-                    <Animated.Image style={{ ...styles.image, width: width, height: height, borderRadius: borderRadius }} resizeMode='cover' source={pressInfo.imageSource} />
+                <Animated.View style={{ transform: containerTransform, width: width, height: height, borderRadius: borderRadius, overflow: 'hidden', justifyContent: 'center', alignItems: 'center' }}>
+                    <Animated.Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={pressInfo.imageSource} />
                     <Animated.View style={{ ...styles.textContainer, transform: textTransform }} ><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                     </Animated.View>
 
