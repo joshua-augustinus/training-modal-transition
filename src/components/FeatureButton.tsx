@@ -1,3 +1,4 @@
+import { getEmptyNavigationOptions } from "@src/HeaderHelper";
 import { updateMediumPressInfo, updateSmallPressInfo } from "@src/reducers";
 import React, { useRef, useState } from "react";
 import { Image, Pressable, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
@@ -39,17 +40,20 @@ const FeatureButton = (props: Props) => {
         });
     }
 
-    const imageTransform = [{ scale: 1 }]
+    const imageTransform = [{ scale: props.halfSize ? 0.6 : 1 }]
 
+    const gap = 10;
+    const smallWidth = (screenWidth - (gap * 3)) / 2
+    const mediumWidth = screenWidth - (gap * 2)
 
-    const width = props.halfSize ? screenWidth / 2 - 20 : screenWidth - 30
+    const width = props.halfSize ? smallWidth : mediumWidth
     return (
 
 
         <Pressable onPress={onButtonPress} >
             <View collapsable={false} style={{ ...styles.container, ...props.style, }}>
-                <View ref={cardRef} style={{ overflow: 'hidden', width: width, height: FEATURE_BUTTON_HEIGHT, borderRadius: BORDER_RADIUS, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={props.image} />
+                <View ref={cardRef} style={{ width: width, height: FEATURE_BUTTON_HEIGHT, borderRadius: BORDER_RADIUS, ...styles.imageContainer }}>
+                    <Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100, transform: imageTransform }} resizeMode='cover' source={props.image} />
 
                 </View>
                 <View style={styles.textContainer}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
@@ -73,5 +77,8 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: BORDER_RADIUS,
+    },
+    imageContainer: {
+        overflow: 'hidden', alignItems: 'center', justifyContent: 'center'
     }
 })

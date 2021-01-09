@@ -101,7 +101,14 @@ const SmallTransition = (props: Props) => {
     }
 
     ]
+    const imageTransform = [{
+        scale: layoutState.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0.6, 1]
+        })
+    }
 
+    ]
 
 
 
@@ -139,8 +146,8 @@ const SmallTransition = (props: Props) => {
             <View style={{ height: 50, opacity: 0 }}>
             </View>
             <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor: 'white', opacity: opacity }}>
-                <Animated.View style={{ transform: containerTransform, width: width, height: height, borderRadius: borderRadius, overflow: 'hidden', justifyContent: 'center', alignItems: 'center' }}>
-                    <Animated.Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={pressInfo.imageSource} />
+                <Animated.View style={{ transform: containerTransform, width: width, height: height, borderRadius: borderRadius, ...styles.imageContainer }}>
+                    <Animated.Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100, transform: imageTransform }} resizeMode='cover' source={pressInfo.imageSource} />
                     <Animated.View style={{ ...styles.textContainer, transform: textTransform }} ><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                     </Animated.View>
 
@@ -171,6 +178,9 @@ const styles = StyleSheet.create({
     },
     image: {
 
+    },
+    imageContainer: {
+        overflow: 'hidden', alignItems: 'center', justifyContent: 'center'
     }
 });
 

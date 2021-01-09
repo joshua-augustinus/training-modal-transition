@@ -12,8 +12,8 @@ type Props = {
     navigation: NavigationDrawerProp<{ userId: string, routeName: string }>;
 }
 
-const image1 = require('../assets/sample.jpg');
-const image2 = require('../assets/1124.jpg')
+const image1 = require('../assets/1124.jpg');
+const image2 = require('../assets/990.jpg')
 
 const MasterScreen = (props: Props) => {
 
@@ -53,17 +53,17 @@ const MasterScreen = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View onLayout={onLayout} style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
-                <View style={{ flexDirection: 'row', }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                     <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} image={image1} />
                     <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} image={image1} />
 
                 </View>
-                <View style={{ flexDirection: 'row', }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                     <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} image={image2} />
                     <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} image={image1} />
 
                 </View>
-                <View style={{ flexDirection: 'row', }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                     <FeatureButton navigation={props.navigation} style={styles.leftButton} halfSize={true} image={image1} />
                     <FeatureButton navigation={props.navigation} style={styles.rightButton} halfSize={true} image={image1} />
 
@@ -84,9 +84,7 @@ export { MasterScreen }
 
 const styles = StyleSheet.create({
     leftButton: {
-        marginRight: 5
     },
     rightButton: {
-        marginLeft: 5
     }
 })
