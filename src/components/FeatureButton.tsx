@@ -20,10 +20,13 @@ const FeatureButton = (props: Props) => {
     const cardRef = useRef(null);
     const dispatch = useDispatch();
 
+    const scale = props.halfSize ? 0.8 : 1;
+
     const onButtonPress = () => {
         console.log("Pressed");
         cardRef.current.measure((x, y, width, height, pageX, pageY) => {
             const layout = {
+                scale: scale,
                 x: pageX, y: pageY, width: width, height: height, imageSource: props.image, borderRadius: BORDER_RADIUS, callback: () => {
                     props.navigation.navigate('SecondScreen')
                 }
@@ -40,7 +43,7 @@ const FeatureButton = (props: Props) => {
         });
     }
 
-    const imageTransform = [{ scale: props.halfSize ? 0.6 : 1 }]
+    const imageTransform = [{ scale: scale }]
 
     const gap = 10;
     const smallWidth = (screenWidth - (gap * 3)) / 2

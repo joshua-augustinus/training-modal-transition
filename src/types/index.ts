@@ -18,5 +18,6 @@ export interface PressInfo {
     height: number,
     imageSource: any,
     borderRadius: number,
-    callback: () => void
+    callback: () => void,
+    scale?: number
 }

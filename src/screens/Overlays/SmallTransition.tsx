@@ -104,7 +104,7 @@ const SmallTransition = (props: Props) => {
     const imageTransform = [{
         scale: layoutState.interpolate({
             inputRange: [0, 1],
-            outputRange: [0.6, 1]
+            outputRange: [pressInfo.scale, 1]
         })
     }
 
