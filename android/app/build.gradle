@@ -154,6 +154,7 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
+            signingConfig signingConfigs.debug
 
         }
     }
