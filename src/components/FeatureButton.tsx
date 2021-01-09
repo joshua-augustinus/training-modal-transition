@@ -20,7 +20,7 @@ const FeatureButton = (props: Props) => {
     const cardRef = useRef(null);
     const dispatch = useDispatch();
 
-    const scale = props.halfSize ? 0.8 : 1;
+    const scale = props.halfSize ? 0.7 : 1;
 
     const onButtonPress = () => {
         console.log("Pressed");
