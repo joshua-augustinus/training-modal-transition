@@ -108,11 +108,7 @@ const MediumTransition = (props: Props) => {
         outputRange: [pressInfo.borderRadius, 0]
     })
 
-    //This is needed to get rid of flash
-    const opacity = layoutState.interpolate({
-        inputRange: [0, 0.1, 1],
-        outputRange: [0, 1, 1]
-    })
+
     const overlayTransform = [{ translateX: transitionString === 'forward' ? 0 : screenWidth }]
 
 
@@ -120,9 +116,9 @@ const MediumTransition = (props: Props) => {
         <SafeAreaView style={{ ...styles.overlayContainer, transform: overlayTransform }}>
             <View style={{ height: 50, opacity: 0 }}>
             </View>
-            <Animated.View style={{ ...styles.contentContainer, opacity: opacity }}>
+            <Animated.View style={{ ...styles.contentContainer, opacity: 1 }}>
                 <Spring.View style={{ transform: containerTransform }}>
-                    <Animated.View style={{ transform: imageTransform, width: width, height: height, borderRadius: borderRadius, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+                    <Animated.View style={{ ...styles.imageContainer, transform: imageTransform, width: width, height: height, borderRadius: borderRadius }}>
                         <Animated.Image style={{ ...styles.image, width: screenWidth, height: FEATURE_BUTTON_HEIGHT + 100 }} resizeMode='cover' source={pressInfo.imageSource} />
                         <View style={{ ...styles.textContainer, width: screenWidth - 40 }}><Text style={{ color: 'white' }}>Text Text Text Text Text Text</Text>
                         </View>
@@ -158,5 +154,8 @@ const styles = StyleSheet.create({
     },
     image: {
 
+    },
+    imageContainer: {
+        overflow: 'hidden', alignItems: 'center', justifyContent: 'center'
     }
 });
